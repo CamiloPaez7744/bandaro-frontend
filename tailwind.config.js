@@ -1,0 +1,19 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+    "./node_modules/flowbite/**/*.js",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['"Chivo"', 'sans-serif'],
+        body: ['"Tinos"', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [
+    require('flowbite/plugin')
+  ],
+  darkMode: 'class',
+};

@@ -1,0 +1,201 @@
+$wood: #4b1e0c;
+$felt: #065f8d;
+$rubber: #044e70;
+$diamond-size: 8px;
+$border-size: 36px;
+$band-size-y: 3.7%;
+$band-size-x: 1.85%;
+
+.sandbox-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #001f2f;
+  width: 100%;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.table-outer {
+  aspect-ratio: 2 / 1;
+  width: 100%;
+  max-width: 1280px;
+  background-color: $wood;
+  border-radius: 1rem;
+  padding: $border-size;
+  position: relative;
+}
+
+.table-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $felt;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+// Bandas de caucho
+.rubber-bands {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  .band {
+    position: absolute;
+    background-color: $rubber;
+    z-index: 2;
+  }
+
+  .top {
+    top: 0;
+    height: $band-size-y;
+    width: 100%;
+    box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.2); // sombra hacia abajo
+  }
+
+  .bottom {
+    bottom: 0;
+    height: $band-size-y;
+    width: 100%;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); // sombra hacia arriba
+  }
+
+  .left {
+    left: 0;
+    width: $band-size-x;
+    height: 100%;
+    box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.2); // sombra hacia derecha
+  }
+
+  .right {
+    right: 0;
+    width: $band-size-x;
+    height: 100%;
+    box-shadow: inset 4px 0 8px rgba(0, 0, 0, 0.2); // sombra hacia izquierda
+  }
+
+  .corner {
+    position: absolute;
+    background-color: $rubber;
+    z-index: 3;
+    width: 24px;
+    height: 24px;
+    transform: rotate(45deg);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .tl {
+    top: calc(#{$band-size-y} / -2);
+    left: calc(#{$band-size-x} / -2);
+  }
+
+  .tr {
+    top: calc(#{$band-size-y} / -2);
+    right: calc(#{$band-size-x} / -2);
+  }
+
+  .bl {
+    bottom: calc(#{$band-size-y} / -2);
+    left: calc(#{$band-size-x} / -2);
+  }
+
+  .br {
+    bottom: calc(#{$band-size-y} / -2);
+    right: calc(#{$band-size-x} / -2);
+  }
+}
+
+// Área jugable
+.play-area {
+  position: absolute;
+  top: $band-size-y;
+  left: $band-size-x;
+  right: $band-size-x;
+  bottom: $band-size-y;
+  background-color: $felt;
+  z-index: 3;
+}
+
+// Bolas
+.ball {
+  position: absolute;
+  width: 3%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent 60%);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  z-index: 4;
+
+  &:active {
+    cursor: grabbing;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.7),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Diamantes
+.diamond {
+  position: absolute;
+  width: $diamond-size;
+  height: $diamond-size;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 10;
+  opacity: 0.9;
+
+  // Centrado dentro del borde superior (36px)
+  &.top {
+    top: $border-size / 2;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  &.bottom {
+    bottom: $border-size / 2;
+    transform: translateX(-50%) translateY(50%);
+  }
+
+  &.left {
+    left: $border-size / 2;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  &.right {
+    right: $border-size / 2;
+    transform: translateX(50%) translateY(-50%);
+  }
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+
+  .grid-line {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .vertical {
+    width: 1px;
+    height: 100%;
+    top: 0;
+  }
+
+  .horizontal {
+    height: 1px;
+    width: 100%;
+    left: 0;
+  }
+}

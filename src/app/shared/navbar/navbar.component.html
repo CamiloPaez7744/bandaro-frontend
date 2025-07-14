@@ -1,0 +1,49 @@
+<nav class="bg-[#024059] text-white px-6 py-4 shadow-lg font-heading">
+  <div class="flex justify-between items-center max-w-7xl mx-auto">
+    <!-- Logo -->
+    <a class="text-3xl font-heading font-semibold tracking-wide text-[#04BF8A]" routerLink="/">
+      🎱 Bandaro
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex gap-8 text-base font-medium">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="text-[#04BF8A]"
+        class="hover:text-[#04BF8A] transition-colors duration-200"
+      >Dashboard</a>
+      <a
+        routerLink="/lessons"
+        routerLinkActive="text-[#04BF8A]"
+        class="hover:text-[#04BF8A] transition-colors duration-200"
+      >Lessons</a>
+      <a
+        routerLink="/courses"
+        routerLinkActive="text-[#04BF8A]"
+        class="hover:text-[#04BF8A] transition-colors duration-200"
+      >Course</a>
+      <a
+        routerLink="/sandbox"
+        routerLinkActive="text-[#04BF8A]"
+        class="hover:text-[#04BF8A] transition-colors duration-200"
+      >Sandbox</a>
+    </div>
+
+    <!-- Mobile button -->
+    <button class="md:hidden focus:outline-none" (click)="toggleMenu()">
+      <svg class="w-7 h-7 transition-transform duration-300" [class.rotate-90]="mobileMenuOpen" fill="none"
+        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path [attr.d]="mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile links -->
+  <div *ngIf="mobileMenuOpen" class="md:hidden mt-4 space-y-3 px-4 text-base font-medium">
+    <a class="block hover:text-[#04BF8A]" routerLink="/dashboard" (click)="toggleMenu()">Dashboard</a>
+    <a class="block hover:text-[#04BF8A]" routerLink="/lessons" (click)="toggleMenu()">Lessons</a>
+    <a class="block hover:text-[#04BF8A]" routerLink="/courses" (click)="toggleMenu()">Courses</a>
+    <a class="block hover:text-[#04BF8A]" routerLink="/sandbox" (click)="toggleMenu()">Sandbox</a>
+  </div>
+</nav>

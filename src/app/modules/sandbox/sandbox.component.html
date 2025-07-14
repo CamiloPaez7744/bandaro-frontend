@@ -1,0 +1,69 @@
+<div class="sandbox-wrapper">
+  <div class="table-outer">
+    <!-- Diamantes sobre el pasamanos (madera) -->
+    <ng-container *ngFor="let x of [14.3, 28.6, 42.9, 57.1, 71.4, 85.7]">
+      <div class="diamond top" [ngStyle]="{ left: x + '%' }"></div>
+      <div class="diamond bottom" [ngStyle]="{ left: x + '%' }"></div>
+    </ng-container>
+    <ng-container *ngFor="let y of [25, 50, 75]">
+      <div class="diamond left" [ngStyle]="{ top: y + '%' }"></div>
+      <div class="diamond right" [ngStyle]="{ top: y + '%' }"></div>
+    </ng-container>
+    <!-- Pasamanos de madera -->
+    <div class="table-inner">
+      <!-- Bandas de caucho -->
+      <div class="rubber-bands">
+        <div class="band top"></div>
+        <div class="band bottom"></div>
+        <div class="band left"></div>
+        <div class="band right"></div>
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+      </div>
+
+      <!-- Área jugable -->
+      <div
+        class="play-area"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="stopDrag()"
+        (mouseleave)="stopDrag()"
+      >
+        <!-- Bolas -->
+        <div
+          *ngFor="let ball of balls; let i = index"
+          class="ball"
+          [ngStyle]="{
+            top: ball.top + '%',
+            left: ball.left + '%',
+            backgroundColor: ball.color
+          }"
+          (mousedown)="startDrag(i)"
+        ></div>
+        <!-- Cuadrícula sobre la pizarra -->
+        <div class="grid-overlay">
+          <!-- Líneas verticales -->
+          <div
+            *ngFor="
+              let x of [].constructor(verticalDivisions - 1);
+              let i = index
+            "
+            class="grid-line vertical"
+            [ngStyle]="{ left: (i + 1) * (100 / verticalDivisions) + '%' }"
+          ></div>
+
+          <!-- Líneas horizontales -->
+          <div
+            *ngFor="
+              let y of [].constructor(horizontalDivisions - 1);
+              let i = index
+            "
+            class="grid-line horizontal"
+            [ngStyle]="{ top: (i + 1) * (100 / horizontalDivisions) + '%' }"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
